@@ -39,13 +39,42 @@ public class UserDAO {
         }
     }
 
-    public User getUser(int id){
+    public User getUserById(int id){
         Connection con = null;
         User user = null;
         try {
             con = dataBaseConfig.getConnection();
             PreparedStatement ps = con.prepareStatement(DBConstants.GET_USER_INFO);
             ps.setString(1, String.valueOf(id));
+            //ID, NAME, EMAIL, PASS, CREATED_AT, IBAN, BALANCE
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                user = new User();
+                user.setId(rs.getInt(1));
+                user.setName(rs.getString(2));
+                user.setEmail(rs.getString(3));
+                user.setPassword(rs.getString(4));
+                user.setCreatedAt(rs.getTimestamp(5));
+                user.setIban(rs.getString(6));
+                user.setBalance(rs.getFloat(7));
+            }
+            dataBaseConfig.closeResultSet(rs);
+            dataBaseConfig.closePreparedStatement(ps);
+        }catch (Exception ex){
+            logger.error("Error fetching User",ex);
+        }finally {
+            dataBaseConfig.closeConnection(con);
+            return user;
+        }
+    }
+
+    public User getUserByEmail(String email){
+        Connection con = null;
+        User user = null;
+        try {
+            con = dataBaseConfig.getConnection();
+            PreparedStatement ps = con.prepareStatement(DBConstants.GET_USER_BY_EMAIL);
+            ps.setString(1, String.valueOf(email));
             //ID, NAME, EMAIL, PASS, CREATED_AT, IBAN, BALANCE
             ResultSet rs = ps.executeQuery();
             if(rs.next()){

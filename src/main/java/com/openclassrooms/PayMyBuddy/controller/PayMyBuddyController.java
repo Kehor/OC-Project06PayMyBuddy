@@ -14,10 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -35,7 +33,7 @@ public class PayMyBuddyController {
 
     @GetMapping(value = "/")
     public String index(Model model) {
-        this.user = userDao.getUser(userid);
+        this.user = userDao.getUserById(userid);
         model.addAttribute("name",user.getName());
         return "index";
     }
@@ -54,5 +52,14 @@ public class PayMyBuddyController {
         if(description == null)description="No description";
         if(amount > 0)transactionsService.makeTransaction(userid, sendTo, description, amount);
         return transactions(model);
+    }
+    @PostMapping(value = "/contact")
+    public String friendlist(@RequestParam(name="email", required=true) String email, Model model) {
+        User user = new User();
+        user = userDao.getUserByEmail(email);
+        if(user != null) {
+            model.addAttribute("user",user);
+        }
+        return "contact";
     }
 }

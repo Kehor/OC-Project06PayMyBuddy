@@ -12,7 +12,7 @@ public class UserService {
 
     public String getUserNameOrEmail(int userid){
         String name = "undefined";
-        user = userDao.getUser(userid);
+        user = userDao.getUserById(userid);
         if(user.getName() != null){
             name = user.getName();
         }else {
