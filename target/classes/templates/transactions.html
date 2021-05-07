@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Transations</title>
+    <link th:href="@{/styles/css/main.css}" rel="stylesheet" />
+    <script src="script.js"></script>
+</head>
+<body>
+<nav>
+    <div><a class="navTitle" th:href="@{/}">PayMyBuddy</a></div>
+    <div class="nav">
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/transactions}">Transfer</a>
+        <a href="">Profile</a>
+        <a href="">contact</a>
+        <a href="">Log In</a>
+    </div>
+</nav>
+
+<div class="content">
+
+    <h2>Send Money</h2>
+
+    <form th:action="@{/sendtransaction}" method="post">
+        <select name="sendTo" id="form-select">
+
+            <option th:each ="friend : ${friends.friend}" th:value="${friend}">...</option>
+        </select>
+        <input type="decimal" name="amount" value="0">
+        <input type="submit" value="Pay">
+    </form>
+
+    <h2>My Transactions</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Connections</th>
+            <th>Description</th>
+            <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each ="transaction : ${transactions}">
+            <td th:text="${transaction.receiverName}"></td>
+            <td th:text="${transaction.description}"></td>
+            <td th:text="${transaction.amount}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
