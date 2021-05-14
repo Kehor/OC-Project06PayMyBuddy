@@ -8,15 +8,12 @@ public class Friends {
 
     private List<Integer> friend;
 
-    private List<String> friendName;
-
     public Friends(){
     }
 
-    public Friends(int user, List<Integer> friend, List<String> friendName) {
+    public Friends(int user, List<Integer> friend) {
         this.user = user;
         this.friend = friend;
-        this.friendName = friendName;
     }
 
     public int getUser() {
@@ -35,11 +32,4 @@ public class Friends {
         this.friend = friend;
     }
 
-    public List<String> getFriendName() {
-        return friendName;
-    }
-
-    public void setFriendName(List<String> friendName) {
-        this.friendName = friendName;
-    }
 }

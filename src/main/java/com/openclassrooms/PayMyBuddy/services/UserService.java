@@ -15,7 +15,7 @@ public class UserService {
         user = userDao.getUserById(userid);
         if(user.getName() != null){
             name = user.getName();
-        }else {
+        }else if(user.getEmail() != null){
             name = user.getEmail();
         }
         return name;

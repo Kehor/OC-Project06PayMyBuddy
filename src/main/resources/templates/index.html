@@ -2,7 +2,7 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Home</title>
+    <title>Pay My Buddy</title>
     <link th:href="@{/styles/css/main.css}" rel="stylesheet" />
     <script src="script.js"></script>
 </head>
@@ -10,13 +10,39 @@
 <nav>
     <div><a class="navTitle" th:href="@{/}">PayMyBuddy</a></div>
     <div class="nav">
-        <a th:href="@{/}">Home</a>
+        <a class="selected" th:href="@{/}">Home</a>
         <a th:href="@{/transactions}">Transfer</a>
-        <a href="">Profile</a>
-        <a href="">contact</a>
-        <a href="">Log In</a>
+        <a th:href="@{/profile}">Profile</a>
+        <a th:href="@{/contact}">Contact</a>
+        <a th:href="@{/login}">Log In</a>
     </div>
 </nav>
-<h1 th:text="${name}"></h1>
+<div class="nav2">
+    <a class="home" th:href="@{/}">Home</a>
+    <p> / </p>
+</div>
+<div class="middle">
+    <div class="middleTop" th:object="${user}">
+        <h2 th:text="*{name}"></h2>
+        <h2><span th:text="*{balance}"></span> €</h2>
+    </div>
+    <h2>My Last Transactions</h2>
+    <table class="transactions">
+        <thead>
+        <tr>
+            <th>Connections</th>
+            <th>Description</th>
+            <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each ="transaction : ${transactions}">
+            <td th:text="${transaction.receiverName}"></td>
+            <td th:text="${transaction.description}"></td>
+            <td><span th:text="${transaction.amount}"></span> €</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

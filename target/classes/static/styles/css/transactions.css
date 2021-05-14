@@ -1,0 +1,17 @@
+.middleTop * {
+    padding: 10px;
+}
+
+input.number {
+    text-align: right;
+    width: 3rem;
+    border-block-width: 3px;
+}
+
+input.pay {
+    padding: 1rem 2rem;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}

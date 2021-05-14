@@ -1,0 +1,12 @@
+form input {
+    margin : 0.5rem;
+    border-block-width: 3px;
+    padding : 10px;
+    font-weight: bold;
+    font-size: large;
+
+}
+
+form {
+    flex-direction: column !important;
+}

@@ -6,7 +6,9 @@ import com.openclassrooms.PayMyBuddy.entity.Bank;
 import com.openclassrooms.PayMyBuddy.entity.Transactions;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Service
@@ -23,5 +25,27 @@ public class TransactionsService {
             bankDAO.addBankTransaction(bank);
         }
         */
+    }
+
+    public List<Transactions> getSendTransaction(List<Transactions> transactions){
+        List<Transactions> transactionsList = new ArrayList<>();
+
+        return transactionsList;
+    }
+
+    public List<Transactions> getReceiveTransaction(List<Transactions> transactions){
+        List<Transactions> transactionsList = new ArrayList<>();
+
+        return transactionsList;
+    }
+
+    public Date lastTransactionWithFriend (int userId, int friendId){
+        List<Transactions> transactionsList = new ArrayList<>();
+        Date lastTransaction = null;
+        transactionsList = transactionsDAO.getTransaction(userId,friendId);
+        for (Transactions transactions: transactionsList){
+           if (lastTransaction == null || lastTransaction.getTime() < transactions.getCreatedAt().getTime()) lastTransaction = transactions.getCreatedAt();
+        }
+        return lastTransaction;
     }
 }

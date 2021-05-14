@@ -3,9 +3,11 @@ package com.openclassrooms.PayMyBuddy.controller;
 import com.openclassrooms.PayMyBuddy.dao.FriendsDAO;
 import com.openclassrooms.PayMyBuddy.dao.TransactionsDAO;
 import com.openclassrooms.PayMyBuddy.dao.UserDAO;
+import com.openclassrooms.PayMyBuddy.dto.FriendsDTO;
 import com.openclassrooms.PayMyBuddy.entity.Friends;
 import com.openclassrooms.PayMyBuddy.entity.Transactions;
 import com.openclassrooms.PayMyBuddy.entity.User;
+import com.openclassrooms.PayMyBuddy.services.FriendsService;
 import com.openclassrooms.PayMyBuddy.services.TransactionsService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,20 +30,26 @@ public class PayMyBuddyController {
     int userid = 4;
     @Autowired
     private TransactionsService transactionsService;
+    @Autowired
+    private FriendsService friendsService;
 
     private static final Logger logger = LogManager.getLogger("Debug");
 
     @GetMapping(value = "/")
     public String index(Model model) {
         this.user = userDao.getUserById(userid);
-        model.addAttribute("name",user.getName());
+        List <Transactions> transactions = transactionsDao.getTransaction(userid);
+        if(transactions.size() > 5)transactions.subList(5, transactions.size()).clear();
+        model.addAttribute("user",user);
+        model.addAttribute("transactions",transactions);
         return "index";
     }
 
     @GetMapping(value = "/transactions")
     public String transactions(Model model) {
-        List <Transactions> transactions = transactionsDao.getTransaction(userid,true);
-        Friends friends = friendsDAO.getFriends(userid);
+        List <Transactions> transactions = transactionsDao.getTransaction(userid);
+        if(transactions.size() > 5)transactions.subList(5, transactions.size()).clear();
+        List<FriendsDTO> friends = friendsService.getFriendsList(this.user.getId(),friendsDAO.getFriends(userid).getFriend());
         model.addAttribute("transactions",transactions);
         model.addAttribute("friends",friends);
         return "transactions";
@@ -53,7 +61,28 @@ public class PayMyBuddyController {
         if(amount > 0)transactionsService.makeTransaction(userid, sendTo, description, amount);
         return transactions(model);
     }
-    @PostMapping(value = "/contact")
+
+    @GetMapping(value = "/profile")
+    public String profile(Model model) {
+        this.user = userDao.getUserById(userid);
+        List <Transactions> transactions = transactionsDao.getTransaction(userid);
+        if(transactions.size() > 5)transactions.subList(5, transactions.size()).clear();
+        model.addAttribute("transactions",transactions);
+        model.addAttribute("user",user);
+
+        return "profile";
+    }
+
+    @GetMapping(value = "/contact")
+    public String contact(Model model) {
+        this.user = userDao.getUserById(userid);
+        List<FriendsDTO> friends = friendsService.getFriendsList(this.user.getId(),friendsDAO.getFriends(userid).getFriend());
+        model.addAttribute("user",user);
+        model.addAttribute("friends",friends);
+        return "contact";
+    }
+
+    @PostMapping(value = "/addfriend")
     public String friendlist(@RequestParam(name="email", required=true) String email, Model model) {
         User user = new User();
         user = userDao.getUserByEmail(email);

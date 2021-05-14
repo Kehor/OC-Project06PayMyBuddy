@@ -54,7 +54,7 @@ public class FriendsDAO {
                 friendsId.add(rs.getInt(1));
             }
 
-            friends = new Friends(userId,friendsId,friendsService.getFriendsName(friendsId));
+            friends = new Friends(userId,friendsId);
             dataBaseConfig.closeResultSet(rs);
             dataBaseConfig.closePreparedStatement(ps);
         }catch (Exception ex){

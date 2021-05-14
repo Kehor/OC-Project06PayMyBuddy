@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>Pay My Buddy</title>
+    <link th:href="@{/styles/css/main.css}" rel="stylesheet" />
+    <script src="script.js"></script>
 </head>
 <body>
-
+<nav>
+    <div><a class="navTitle" th:href="@{/}">PayMyBuddy</a></div>
+    <div class="nav">
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/transactions}">Transfer</a>
+        <a th:href="@{/profile}">Profile</a>
+        <a class="selected" th:href="@{/contact}">Contact</a>
+        <a th:href="@{/login}">Log In</a>
+    </div>
+</nav>
+<div class="nav2">
+    <a class="home" th:href="@{/}">Home</a>
+    <p> / </p>
+    <p>Contact</p>
+</div>
+<div class="middle">
+    <div class="flex">
+        <h2>My Friends List</h2>
+        <a th:href="@{/addfriend}" class="add">Add Connection</a>
+    </div>
+    <table class="transactions">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Last Transaction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each ="friend : ${friends}">
+            <td th:text="${friend.name}"></td>
+            <td th:text="${friend.lastTransaction}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

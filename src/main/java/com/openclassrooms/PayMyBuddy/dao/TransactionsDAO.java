@@ -45,24 +45,33 @@ public class TransactionsDAO {
 
     /**
      *
-     * @param direction
-     *      True for transaction send by user
-     *      False for transaction received by user
+     *  Get All transaction of User
      *
      */
-    public List<Transactions> getTransaction(int userId, boolean direction) {
+    public List<Transactions> getTransaction(int userId) {
+
+        return getTransaction(userId, userId);
+    }
+
+    /**
+     *
+     *  Get Only transaction between two Users
+     *
+     */
+    public List<Transactions> getTransaction(int userId, int friendId) {
         Connection con = null;
         Transactions transaction = null;
         List<Transactions> transactions = new ArrayList<>();
         PreparedStatement ps = null;
         try {
             con = dataBaseConfig.getConnection();
-            if(direction == true) {
-                ps = con.prepareStatement(DBConstants.GET_SEND_TRANSACTIONS);
+            if(userId == friendId){
+                ps = con.prepareStatement(DBConstants.GET_TRANSACTIONS);
             }else {
-                ps = con.prepareStatement(DBConstants.GET_RECEIVE_TRANSACTIONS);
+                ps = con.prepareStatement(DBConstants.GET_TRANSACTIONSWithUser);
             }
             ps.setString(1, String.valueOf(userId));
+            ps.setString(2, String.valueOf(friendId));
             //ID, SENDER_ID, RECEIVER_ID, DESCRIPTION, AMOUNT, CREATED_AT
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
