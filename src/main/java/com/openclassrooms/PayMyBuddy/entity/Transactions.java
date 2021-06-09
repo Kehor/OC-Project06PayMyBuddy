@@ -1,77 +1,64 @@
-package com.openclassrooms.PayMyBuddy.entity;
+package com.openclassrooms.PayMyBuddy.Entity;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name="transactions")
 public class Transactions {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    private Long id;
 
-    private int id;
+    @Column(name="sender_id")
+    private Long senderId;
 
-    private int senderId;
+    @Column(name="receiver_id")
+    private Long receiverId;
 
-    private String senderName;
-
-    private int receiverId;
-
-    private String receiverName;
-
+    @Column(name="description")
     private String description;
 
+    @Column(name="amount")
     private float amount;
 
+    @Column(name="created_at")
     private Date createdAt;
 
     public Transactions(){
     }
 
-    public Transactions(int id, int senderId, String senderName, int receiverId, String receiverName, String description, float amount, Date createdAt) {
+    public Transactions(Long id, Long senderId, Long receiverId, String description, float amount, Date createdAt) {
         this.id = id;
         this.senderId = senderId;
-        this.senderName = senderName;
         this.receiverId = receiverId;
-        this.receiverName = receiverName;
         this.description = description;
         this.amount = amount;
         this.createdAt = createdAt;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getSenderId() {
+    public Long getSenderId() {
         return senderId;
     }
 
-    public void setSenderId(int senderId) {
+    public void setSenderId(Long senderId) {
         this.senderId = senderId;
     }
 
-    public String getSenderName() {
-        return senderName;
-    }
-
-    public void setSenderName(String senderName) {
-        this.senderName = senderName;
-    }
-
-    public int getReceiverId() {
+    public Long getReceiverId() {
         return receiverId;
     }
 
-    public void setReceiverId(int receiverId) {
+    public void setReceiverId(Long receiverId) {
         this.receiverId = receiverId;
-    }
-
-    public String getReceiverName() {
-        return receiverName;
-    }
-
-    public void setReceiverName(String receiverName) {
-        this.receiverName = receiverName;
     }
 
     public String getDescription() {

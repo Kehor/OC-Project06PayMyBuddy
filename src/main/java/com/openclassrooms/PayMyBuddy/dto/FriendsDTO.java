@@ -1,10 +1,10 @@
-package com.openclassrooms.PayMyBuddy.dto;
+package com.openclassrooms.PayMyBuddy.Dto;
 
 import java.util.Date;
 
 public class FriendsDTO {
 
-    private  int id;
+    private Long id;
 
     private String name;
 
@@ -13,17 +13,17 @@ public class FriendsDTO {
     public FriendsDTO() {
     }
 
-    public FriendsDTO(int id, String name, Date lastTransaction) {
+    public FriendsDTO(Long id, String name, Date lastTransaction) {
         this.id = id;
         this.name = name;
         this.lastTransaction = lastTransaction;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

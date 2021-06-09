@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Pay My Buddy</title>
     <link th:href="@{/styles/css/main.css}" rel="stylesheet" />
+    <link th:href="@{/styles/css/contact.css}" rel="stylesheet" />
     <script src="script.js"></script>
 </head>
 <body>
@@ -24,22 +25,29 @@
 </div>
 <div class="middle">
     <div class="flex">
-        <h2>My Friends List</h2>
-        <a th:href="@{/addContact}" class="add">Add Connection</a>
+        <form class="search" th:action="@{/addContact}" method="post">
+            <input type="search" name="email" value="">
+            <button class="add" name="Submit" type="Submit" >Search Connection</button>
+        </form>
     </div>
     <table class="transactions">
         <thead>
         <tr>
             <th>Name</th>
             <th>Last Transaction</th>
+            <th>Add Contact</th>
         </tr>
         </thead>
-        <tbody>
-        <tr th:each ="friend : ${friends}">
-            <td th:text="${friend.name}"></td>
-            <td th:text="${friend.lastTransaction}"></td>
-        </tr>
-        </tbody>
+            <tbody>
+            <tr th:each ="user : ${users}">
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.email}"></td>
+                <form class="middleTop" th:action="@{/addContact}" method="post">
+                <input type="number" name="friendid" th:value="${user.id}" hidden>
+                <td><button class="add" name="Submit" type="Submit" th:text="Add"></button></td>
+                </form>
+            </tr>
+            </tbody>
     </table>
 </div>
 </body>

@@ -15,3 +15,9 @@ input.pay {
     border: none;
     border-radius: 10px;
 }
+
+.failure {
+    position: absolute;
+    margin-top: 3rem;
+    color: #ff0000dd;
+}

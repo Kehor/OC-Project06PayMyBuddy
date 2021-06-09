@@ -1,31 +1,31 @@
-package com.openclassrooms.PayMyBuddy.entity;
+package com.openclassrooms.PayMyBuddy.Entity;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name="bank")
 public class Bank {
-    /*
-    id int [pk, increment]
-  user_id int
-  description varchar(255)
-  amount decimal(8,2)
-  created_at datetime [default: `now()`]
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    private Long id;
 
-     */
+    @Column(name="user_id")
+    private Long userId;
 
-    private int id;
-
-    private int userId;
-
+    @Column(name="description")
     private String description;
 
+    @Column(name="amount")
     private float amount;
 
+    @Column(name="created_at")
     private Date createdAt;
 
     public Bank(){
     }
 
-    public Bank(int id, int userId, String description, float amount, Date createdAt) {
+    public Bank(Long id, Long userId, String description, float amount, Date createdAt) {
         this.id = id;
         this.userId = userId;
         this.description = description;
@@ -33,19 +33,19 @@ public class Bank {
         this.createdAt = createdAt;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

@@ -15,7 +15,7 @@
         <a class="selected" th:href="@{/transactions}">Transfer</a>
         <a th:href="@{/profile}">Profile</a>
         <a th:href="@{/contact}">Contact</a>
-        <a th:href="@{/login}">Log In</a>
+        <a th:href="@{/logout}">Log out</a>
     </div>
 </nav>
 <div class="nav2">
@@ -26,7 +26,7 @@
 <div class="middle">
     <div class="flex">
         <h2>Send Money</h2>
-        <a th:href="@{/addfriend}" class="add">Add Connection</a>
+        <a th:href="@{/addContact}" class="add">Add Connection</a>
     </div>
     <div>
         <form class="middleTop" th:action="@{/sendtransaction}" method="post">
@@ -36,6 +36,7 @@
             </select>
             <input class="number" type="number" name="amount" value="0" min="1" step="0.01" required>
             <input class="pay" type="submit" value="Pay">
+            <h3 class="failure" th:text="${failure}"></h3>
         </form>
     </div>
     <h2>My Last Transactions</h2>

@@ -1,51 +1,57 @@
-package com.openclassrooms.PayMyBuddy.services;
+package com.openclassrooms.PayMyBuddy.Services;
 
-import com.openclassrooms.PayMyBuddy.dao.BankDAO;
-import com.openclassrooms.PayMyBuddy.dao.TransactionsDAO;
-import com.openclassrooms.PayMyBuddy.entity.Bank;
-import com.openclassrooms.PayMyBuddy.entity.Transactions;
+import com.openclassrooms.PayMyBuddy.Dto.TransactionsDTO;
+import com.openclassrooms.PayMyBuddy.Entity.User;
+import com.openclassrooms.PayMyBuddy.Repository.TransactionsRepository;
+import com.openclassrooms.PayMyBuddy.Repository.UserRepository;
+import com.openclassrooms.PayMyBuddy.Entity.Transactions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
 public class TransactionsService {
-    private TransactionsDAO transactionsDAO = new TransactionsDAO();
-    private BankDAO bankDAO = new BankDAO();
 
-    public void makeTransaction(int userId, int sendTo,String description, float amount){
-        Transactions transactions = new Transactions(0,userId,null,sendTo,null,description,amount,new Date());
-        transactionsDAO.addTransaction(transactions);
-        /*
-        if(sendTo == 0){
-            Bank bank = new Bank(0,userId,description,amount, new Date());
-            bankDAO.addBankTransaction(bank);
+    @Autowired
+    private TransactionsRepository transactionsRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
+
+    public List<TransactionsDTO> getTransactionList (List<Transactions> transactions){
+        List<TransactionsDTO> transactionsDTOList = new ArrayList<>();
+        for (Transactions transaction : transactions) {
+            String senderName = userService.getUserNameOrEmail(transaction.getSenderId());
+            String receiverName = userService.getUserNameOrEmail(transaction.getReceiverId());
+            TransactionsDTO transactionsDTO = new TransactionsDTO(transaction.getId(),senderName,receiverName,transaction.getDescription(),transaction.getAmount());
+            transactionsDTOList.add(transactionsDTO);
         }
-        */
+        return transactionsDTOList;
     }
 
-    public List<Transactions> getSendTransaction(List<Transactions> transactions){
-        List<Transactions> transactionsList = new ArrayList<>();
-
-        return transactionsList;
+    public boolean sendTransaction(Transactions transactions){
+            Optional<User> senderOptional = userRepository.findById(transactions.getSenderId());
+            Optional<User> receiverOptional = userRepository.findById(transactions.getReceiverId());
+            if(senderOptional.isPresent() && receiverOptional.isPresent()){
+                User sender = senderOptional.get();
+                User receiver = receiverOptional.get();
+                if(sender.getBalance() > transactions.getAmount()){
+                    sender.setBalance(sender.getBalance()-transactions.getAmount());
+                    transactions.setAmount(transactions.getAmount()-transactions.getAmount()*(float)0.05);
+                    receiver.setBalance((receiver.getBalance()+(transactions.getAmount())));
+                    transactionsRepository.save(transactions);
+                }else{
+                    return true;
+                }
+            }else {
+                return true;
+            }
+        return false;
     }
 
-    public List<Transactions> getReceiveTransaction(List<Transactions> transactions){
-        List<Transactions> transactionsList = new ArrayList<>();
-
-        return transactionsList;
-    }
-
-    public Date lastTransactionWithFriend (int userId, int friendId){
-        List<Transactions> transactionsList = new ArrayList<>();
-        Date lastTransaction = null;
-        transactionsList = transactionsDAO.getTransaction(userId,friendId);
-        for (Transactions transactions: transactionsList){
-           if (lastTransaction == null || lastTransaction.getTime() < transactions.getCreatedAt().getTime()) lastTransaction = transactions.getCreatedAt();
-        }
-        return lastTransaction;
-    }
 }

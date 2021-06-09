@@ -1,0 +1,32 @@
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `created_at`, `iban`, `balance`, `role_id`) VALUES (2, 'Abel', 'fernando31@hotmail.com', '$2a$10$P.RtjbWtMJhhvsOIO4swZukvgpB3Dv06RUGlIyrETdZL1psaD5ZlK', '2014-10-26 08:23:16', 'FR931nv', '636.00', 2);
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `created_at`, `iban`, `balance`, `role_id`) VALUES (3, 'Stefan', 'treichel@gmail.com', '$2a$10$P.RtjbWtMJhhvsOIO4swZukvgpB3Dv06RUGlIyrETdZL1psaD5ZlK', '1988-09-04 06:46:32', 'FR460pz', '706.75', 2);
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `created_at`, `iban`, `balance`, `role_id`) VALUES (4, 'Willis', 'bradley29@hotmail.com', '$2a$10$P.RtjbWtMJhhvsOIO4swZukvgpB3Dv06RUGlIyrETdZL1psaD5ZlK', '1972-08-03 16:07:12', 'FR064dk', '909.40', 2);
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `created_at`, `iban`, `balance`, `role_id`) VALUES (5, 'Emelia', 'alexandrine.kunze@kihn.net', '$2a$10$P.RtjbWtMJhhvsOIO4swZukvgpB3Dv06RUGlIyrETdZL1psaD5ZlK', '1973-04-17 03:54:05', 'FR081gw', '810.98', 2);
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `created_at`, `iban`, `balance`, `role_id`) VALUES (6, 'Austyn', 'vicenta.haley@ohara.org', '$2a$10$P.RtjbWtMJhhvsOIO4swZukvgpB3Dv06RUGlIyrETdZL1psaD5ZlK', '2003-12-28 13:07:47', 'FR265od', '280.67', 2);
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `created_at`, `iban`, `balance`, `role_id`) VALUES (7, 'Jerald', 'aromaguera@parker.com', '$2a$10$P.RtjbWtMJhhvsOIO4swZukvgpB3Dv06RUGlIyrETdZL1psaD5ZlK', '1976-10-10 21:49:42', 'FR368il', '705.07', 2);
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `created_at`, `iban`, `balance`, `role_id`) VALUES (8, 'Selmer', 'weber.aurelie@hotmail.com', '$2a$10$P.RtjbWtMJhhvsOIO4swZukvgpB3Dv06RUGlIyrETdZL1psaD5ZlK', '1974-04-22 12:51:23', 'FR174zt', '440.00', 2);
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `created_at`, `iban`, `balance`, `role_id`) VALUES (9, 'Orrin', 'nklein@bashirian.org', '$2a$10$P.RtjbWtMJhhvsOIO4swZukvgpB3Dv06RUGlIyrETdZL1psaD5ZlK', '1976-06-29 20:42:34', 'FR415cc', '44.10', 2);
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `created_at`, `iban`, `balance`, `role_id`) VALUES (10, 'Tyra', 'arlene58@will.org', '$2a$10$P.RtjbWtMJhhvsOIO4swZukvgpB3Dv06RUGlIyrETdZL1psaD5ZlK', '1996-09-01 09:42:18', 'FR046jr', '982.79', 2);
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `created_at`, `iban`, `balance`, `role_id`) VALUES (11, 'Dino', 'max96@kuhlman.com', '$2a$10$P.RtjbWtMJhhvsOIO4swZukvgpB3Dv06RUGlIyrETdZL1psaD5ZlK', '1998-01-25 00:23:12', 'FR238oq', '537.56', 2);
+
+INSERT INTO `friends` (`id`, `user_id`, `friend_id`) VALUES (1, 11, 5);
+INSERT INTO `friends` (`id`, `user_id`, `friend_id`) VALUES (2, 4, 7);
+INSERT INTO `friends` (`id`, `user_id`, `friend_id`) VALUES (3, 3, 4);
+INSERT INTO `friends` (`id`, `user_id`, `friend_id`) VALUES (4, 6, 4);
+INSERT INTO `friends` (`id`, `user_id`, `friend_id`) VALUES (5, 9, 1);
+INSERT INTO `friends` (`id`, `user_id`, `friend_id`) VALUES (6, 9, 8);
+INSERT INTO `friends` (`id`, `user_id`, `friend_id`) VALUES (7, 5, 9);
+INSERT INTO `friends` (`id`, `user_id`, `friend_id`) VALUES (8, 11, 2);
+INSERT INTO `friends` (`id`, `user_id`, `friend_id`) VALUES (9, 3, 6);
+INSERT INTO `friends` (`id`, `user_id`, `friend_id`) VALUES (10, 3, 2);
+
+INSERT INTO `transactions` (`id`, `sender_id`, `receiver_id`, `description`, `amount`, `created_at`) VALUES (1, 2, 9, 'Assumenda ut totam.', '675.67', '1977-12-20 01:29:11');
+INSERT INTO `transactions` (`id`, `sender_id`, `receiver_id`, `description`, `amount`, `created_at`) VALUES (2, 7, 3, 'Harum magni.', '275.96', '1987-05-19 18:20:07');
+INSERT INTO `transactions` (`id`, `sender_id`, `receiver_id`, `description`, `amount`, `created_at`) VALUES (3, 7, 3, 'Libero nobis.', '974.50', '2009-08-25 03:46:03');
+INSERT INTO `transactions` (`id`, `sender_id`, `receiver_id`, `description`, `amount`, `created_at`) VALUES (4, 2, 8, 'Dolorem omnis.', '63.53', '1999-08-13 04:14:58');
+INSERT INTO `transactions` (`id`, `sender_id`, `receiver_id`, `description`, `amount`, `created_at`) VALUES (5, 9, 10, 'Dicta quo nesciunt.', '302.52', '1985-05-19 08:33:40');
+INSERT INTO `transactions` (`id`, `sender_id`, `receiver_id`, `description`, `amount`, `created_at`) VALUES (6, 4, 1, 'Labore sit dolorum.', '313.27', '2020-08-25 07:24:34');
+INSERT INTO `transactions` (`id`, `sender_id`, `receiver_id`, `description`, `amount`, `created_at`) VALUES (7, 3, 9, 'Rerum assumenda.', '158.26', '2014-08-07 05:28:45');
+INSERT INTO `transactions` (`id`, `sender_id`, `receiver_id`, `description`, `amount`, `created_at`) VALUES (8, 2, 9, 'Laborum veniam.', '792.36', '1971-08-28 17:35:53');
+INSERT INTO `transactions` (`id`, `sender_id`, `receiver_id`, `description`, `amount`, `created_at`) VALUES (9, 1, 9, 'Harum nihil ratione.', '818.16', '1972-06-29 19:16:25');
+INSERT INTO `transactions` (`id`, `sender_id`, `receiver_id`, `description`, `amount`, `created_at`) VALUES (10, 9, 8, 'Recusandae nulla.', '539.56', '1989-10-03 17:26:18');

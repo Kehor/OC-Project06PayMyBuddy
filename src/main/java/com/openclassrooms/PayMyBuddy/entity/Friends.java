@@ -1,35 +1,59 @@
-package com.openclassrooms.PayMyBuddy.entity;
+package com.openclassrooms.PayMyBuddy.Entity;
 
-import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table(name="friends")
 public class Friends {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    private Long id;
 
-    private int user;
+    @Column(name="user_id")
+    private Long userId;
 
-    private List<Integer> friend;
+    @Column(name="friend_id")
+    private Long friendId;
 
     public Friends(){
     }
 
-    public Friends(int user, List<Integer> friend) {
-        this.user = user;
-        this.friend = friend;
+    public Friends(Long id, Long userId, Long friendId) {
+        this.id = id;
+        this.userId = userId;
+        this.friendId = friendId;
     }
 
-    public int getUser() {
-        return user;
+    public Long getId() {
+        return id;
     }
 
-    public void setUser(int user) {
-        this.user = user;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public List<Integer> getFriend() {
-        return friend;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setFriend(List<Integer> friend) {
-        this.friend = friend;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
+    public Long getFriendId() {
+        return friendId;
+    }
+
+    public void setFriendId(Long friendId) {
+        this.friendId = friendId;
+    }
+
+    @Override
+    public String toString() {
+        return "Friends{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", friendId=" + friendId +
+                '}';
+    }
 }
