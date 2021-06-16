@@ -1,6 +1,6 @@
-package com.openclassrooms.PayMyBuddy.Repository;
+package com.openclassrooms.PayMyBuddy.repository;
 
-import com.openclassrooms.PayMyBuddy.Entity.Friends;
+import com.openclassrooms.PayMyBuddy.entity.Friends;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

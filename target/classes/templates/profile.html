@@ -25,12 +25,12 @@
 </div>
 <div class="middle">
     <div class="middleTop" th:object="${user}">
-        <h2 th:text="*{name}"></h2>
+        <h2 th:text="*{email}"></h2>
         <h2><span th:text="*{balance}"></span> €</h2>
     </div>
         <form  class="middleTop" th:object="${user}" th:action="@{/edituser}" method="post">
-            <label>Email :</label>
-            <input type="text" name="email" th:value="*{email}" required>
+            <label>Nom :</label>
+            <input type="text" name="name" th:value="*{name}" required>
             <label>Password :</label>
             <input type="text" name="pass" value="">
             <label>Iban :</label>

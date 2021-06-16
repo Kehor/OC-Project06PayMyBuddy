@@ -1,4 +1,4 @@
-package com.openclassrooms.PayMyBuddy.Dto;
+package com.openclassrooms.PayMyBuddy.dto;
 
 import java.util.Date;
 

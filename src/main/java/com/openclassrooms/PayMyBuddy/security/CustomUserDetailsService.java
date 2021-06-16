@@ -3,9 +3,9 @@ package com.openclassrooms.PayMyBuddy.security;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.openclassrooms.PayMyBuddy.Entity.Role;
-import com.openclassrooms.PayMyBuddy.Entity.User;
-import com.openclassrooms.PayMyBuddy.Services.UserService;
+import com.openclassrooms.PayMyBuddy.entity.Role;
+import com.openclassrooms.PayMyBuddy.entity.User;
+import com.openclassrooms.PayMyBuddy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,9 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
-
+    private User user;
     @Autowired
     private UserService userService;
+
 
     @Override
     @Transactional(readOnly = true)
@@ -30,12 +31,11 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("username is empty");
         }
 
-        User user = userService.findOneByEmail(username);
+        this.user = userService.findOneByEmail(username);
 
         if (user == null) {
             throw new UsernameNotFoundException("User " + username + " not found");
         }
-
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getGrantedAuthorities(user));
     }
 

@@ -1,8 +1,8 @@
-package com.openclassrooms.PayMyBuddy.Services;
+package com.openclassrooms.PayMyBuddy.services;
 
-import com.openclassrooms.PayMyBuddy.Entity.Role;
-import com.openclassrooms.PayMyBuddy.Entity.User;
-import com.openclassrooms.PayMyBuddy.Repository.UserRepository;
+import com.openclassrooms.PayMyBuddy.entity.Role;
+import com.openclassrooms.PayMyBuddy.entity.User;
+import com.openclassrooms.PayMyBuddy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -45,16 +45,16 @@ public class UserService {
         return name;
     }
 
-    public User saveUser(String name,String email, String password, String iban){
+    public User saveUser(String name, String email, String password, String iban){
         User user = new User();
-        user = userRepository.findByName(name);
+        user = userRepository.findOneByEmail(email);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(password);
-        if(user != null && (user.getEmail() != email || user.getPassword() != encodedPassword || user.getIban() != iban) ){
-            if(!email.isEmpty())user.setEmail(email);
+        if(user != null && (user.getName() != name || user.getPassword() != encodedPassword || user.getIban() != iban) ){
+            if(!name.isEmpty())user.setName(name);
             if(!password.isEmpty())user.setPassword(encodedPassword);
             if(!iban.isEmpty())user.setIban(iban);
-            userRepository.updateUser(user.getId(), user.getEmail(), user.getPassword(), user.getIban());
+            userRepository.updateUser(user.getId(), user.getName(), user.getPassword(), user.getIban());
         }else if(user == null){
             Role role = new Role(2,"ROLE_USER");
             user = new User(null, name, email, encodedPassword, new Date(), iban, 0, role);

@@ -1,4 +1,4 @@
-package com.openclassrooms.PayMyBuddy.Entity;
+package com.openclassrooms.PayMyBuddy.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;

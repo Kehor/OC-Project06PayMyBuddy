@@ -1,14 +1,13 @@
-package com.openclassrooms.PayMyBuddy.Services;
+package com.openclassrooms.PayMyBuddy.services;
 
-import com.openclassrooms.PayMyBuddy.Dto.FriendsDTO;
-import com.openclassrooms.PayMyBuddy.Entity.Friends;
-import com.openclassrooms.PayMyBuddy.Entity.Transactions;
-import com.openclassrooms.PayMyBuddy.Repository.TransactionsRepository;
+import com.openclassrooms.PayMyBuddy.dto.FriendsDTO;
+import com.openclassrooms.PayMyBuddy.entity.Friends;
+import com.openclassrooms.PayMyBuddy.entity.Transactions;
+import com.openclassrooms.PayMyBuddy.repository.TransactionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
